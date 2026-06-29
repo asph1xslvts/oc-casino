@@ -43,15 +43,15 @@ local ADMIN_NICK = "st1amz"      -- кому разрешён выход (тво
 --   label - название в родит. падеже для "три ..." (например "золота")
 -- ===================================================================
 local ICONS = {
-    {id = "gold",       path = "/home/icons/gold.pic",       label = "золота",     weight = 28, triple = 10},
-    {id = "diamond",    path = "/home/icons/diamond.pic",    label = "алмаза",     weight = 20, triple = 15},
-    {id = "netherstar", path = "/home/icons/nether_star.pic", label = "звезды ада", weight = 15, triple = 25},
-    {id = "icon4",      path = "/home/icons/crystal_ingot.pic",      label = "кристалл",    weight = 11, triple = 40},
-    {id = "icon5",      path = "/home/icons/emerald.pic",      label = "изумруд",    weight = 8,  triple = 75},
-    {id = "icon6",      path = "/home/icons/iron_ingot.pic",      label = "железо",    weight = 6,  triple = 120},
-    {id = "icon7",      path = "/home/icons/ruby.pic",      label = "рубин",    weight = 5,  triple = 200},
-    {id = "icon8",      path = "/home/icons/nitor.pic",      label = "нитор",    weight = 4,  triple = 350},
-    {id = "icon9",      path = "/home/icons/ender_eye.pic",      label = "око эндера",    weight = 3,  triple = 750},
+    {id = "icon1",       path = "/home/icons/iron_ingot.pic",       label = "железа",     weight = 28, triple = 10},
+    {id = "icon2",    path = "/home/icons/gold_ingot.pic",    label = "золота",     weight = 20, triple = 12},
+    {id = "icon3", path = "/home/icons/ender_eye.pic", label = "око эндера", weight = 15, triple = 15},
+    {id = "icon4",      path = "/home/icons/diamond.pic",      label = "алмаза",    weight = 11, triple = 17},
+    {id = "icon5",      path = "/home/icons/emerald.pic",      label = "изумруда",    weight = 8,  triple = 20},
+    {id = "icon6",      path = "/home/icons/ruby.pic",      label = "рубина",    weight = 6,  triple = 25},
+    {id = "icon7",      path = "/home/icons/nether_star.pic",      label = "звезды ада",    weight = 5,  triple = 30},
+    {id = "icon8",      path = "/home/icons/nitor.pic",      label = "нитора",    weight = 4,  triple = 40},
+    {id = "icon9",      path = "/home/icons/crystal_ingot.pic",      label = "кристалла",    weight = 3,  triple = 100},
 }
 
 -- --- из таблицы ICONS автоматически собираются нужные структуры ---
@@ -69,8 +69,8 @@ end
 -- Выплаты за пары (под RTP ~87%). НЕ менять без пересчёта математики!
 -- Пара рядом (2 одинаковых подряд) = возврат ставки x1.
 -- Пара по краям = без выплаты (иначе казино уходит в минус).
-local EDGE_MATCH_BONUS = 0
-local ADJACENT_MATCH_BONUS = 1
+local EDGE_MATCH_BONUS = 1
+local ADJACENT_MATCH_BONUS = 2
 
 -- ===================== ПАЛИТРА =====================
 
@@ -172,7 +172,7 @@ local function calculateWin(reels, bet)
         return bonus, bet * bonus
     end
     if a == b or b == c then return ADJACENT_MATCH_BONUS, bet * ADJACENT_MATCH_BONUS end
-    -- пара по краям (a==c) не оплачивается - казино в плюсе
+     if a == c then return EDGE_MATCH_BONUS, bet * EDGE_MATCH_BONUS end
     return 0, 0
 end
 
@@ -597,7 +597,7 @@ local function loginLoop()
     end
 end
 
-local IDLE_TIMEOUT = 60   -- секунд бездействия до возврата на экран логина
+local IDLE_TIMEOUT = 15   -- секунд бездействия до возврата на экран логина
 
 local function gameLoop()
     render(lastReels)

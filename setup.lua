@@ -47,10 +47,10 @@ local function download(url, dest)
     else print("  FAIL " .. dest) end
 end
 
-print("=== Biblioteki ===")
+print("=== Библиотеки ===")
 for _, l in ipairs(LIBS) do download(l[1], l[2]) end
 
-print("=== Kazino i ikonki ===")
+print("=== Казино+иконки ===")
 for _, f in ipairs(FILES) do download(BASE .. f[1], f[2]) end
 
-print("=== Gotovo! Zapusti: opencasino ===")
+print("=== Готово! Запуск: opencasino ===")

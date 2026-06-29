@@ -11,6 +11,7 @@ local LIBS = {
     {"https://raw.githubusercontent.com/IgorTimofeev/Color/master/Color.lua",                 "/usr/lib/color.lua"},
     {"https://raw.githubusercontent.com/IgorTimofeev/DoubleBuffering/master/DoubleBuffering.lua", "/usr/lib/doubleBuffering.lua"},
     {"https://raw.githubusercontent.com/IgorTimofeev/Image/master/Image.lua",                 "/usr/lib/image.lua"},
+    {"https://raw.githubusercontent.com/IgorTimofeev/Image/master/OCIF.lua",                 "/usr/lib/OCIF.lua"},
 }
 
 -- fayly kazino i ikonki s tvoego repozitoriya {na_github, kuda}
